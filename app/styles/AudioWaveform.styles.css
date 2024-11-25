@@ -1,0 +1,130 @@
+.audio-list-container {
+  display: flex;
+  justify-content: center;
+  animation-name: fadeIn;
+  animation-duration: 300ms;
+  max-height: 45vh;
+  border: 1px solid var(--color-light-trans);
+  overflow: scroll;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.audio-list-titles {
+  z-index: 10;
+}
+
+.audio-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.audio-list:hover {
+  color: var(--color-highlight);
+  background-color: var(--color-light-trans);
+}
+
+.audio-list-item {
+  display: flex;
+  width: 100%;
+  color: var(--color-white);
+}
+
+.audio-list-item:hover {
+  background-color: var(--color-light-trans);
+}
+
+.audio-list-item > div {
+  cursor: pointer;
+}
+
+.audio-list-item > a {
+  color: var(--color-white);
+}
+
+/* For Chrome, Safari, and Edge */
+.audio-list-container::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.audio-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded edges of the track */
+}
+
+.audio-list-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scroll handle */
+  border-radius: 10px; /* Rounded edges of the scrollbar thumb */
+  border: 2px solid #f1f1f1; /* Adds padding and border to scrollbar */
+}
+
+.audio-list-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the scrollbar */
+}
+
+/* For Firefox */
+.audio-list-container {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1; /* Handle color and track color */
+}
+
+.wavesurfer-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0vh;
+  max-height: 8vh;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.2rem;
+  background-color: rgb(34, 34, 34);
+  border: 1px solid var(--color-light-trans);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.wavesurfer-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wavesurfer-img-overlay {
+  font-family: "Bootstrap-icons";
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  color: white;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.wavesurfer-waveform {
+  width: 100%;
+  padding-left: 0.5rem;
+}
+
+.random-track-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.scale-up:hover {
+  scale: 1.1;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .audio-list-container {
+    height: 55vh;
+  }
+}/*# sourceMappingURL=AudioWaveform.styles.css.map */

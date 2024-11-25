@@ -1,0 +1,53 @@
+{
+  "audio": [
+    {
+      "id": "0",
+      "title": "VoiceMap",
+      "description": "GPS audio tour editing",
+      "link": "https://voicemap.me/theatreland",
+      "url": "https://media.voicemap.me/public/sound_bites/clips/000/010/534/original/01_START_TKTS_Ticket_Booth.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    },
+    {
+      "id": "1",
+      "title": "Sound Africa",
+      "description": "'Think African' podcast production and development (supported by The Heinrich Boell Foundation)",
+      "link": "https://open.spotify.com/show/2HQNkLsuI9CoEnvPTZ2GIo",
+      "url": "https://johnbartmann.com/site-audio-smp/think-african-10.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    },
+    {
+      "id": "2",
+      "title": "Develop Audio",
+      "description": "'Alibi' podcast production",
+      "link": "https://developaudio.org/anthony",
+      "url": "https://johnbartmann.com/site-audio-smp/alibi-s01e01.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    },
+    {
+      "id": "3",
+      "title": "Telltale Media",
+      "description": "'Your Mom With Schalk' podcast mixing",
+      "link": "https://telltale.media/our-shows/schalk/",
+      "url": "https://media.transistor.fm/572b5785/7cbce5b6.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    },
+    {
+      "id": "4",
+      "title": "Center Stage Collective",
+      "description": "'The LaFresian Chronicles' podcast production & score",
+      "link": "https://pod.link/Lafresiaaudio",
+      "url": "https://pinecast.com/listen/4aafbddf-ba68-4d83-8b6f-34e48014a553.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    },
+    {
+      "id": "5",
+      "title": "Creative podcast production",
+
+      "description": "'How I Make Music' executive podcast production",
+      "link": "https://howimakemusic.com",
+      "url": "https://www.buzzsprout.com/1926734/11607725-dice-tower-theater-mike-atchley-dark-journey.mp3",
+      "imgUrl": "https://source.unsplash.com/collection/1163637/50x50"
+    }
+  ]
+}

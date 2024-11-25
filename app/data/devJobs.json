@@ -1,0 +1,62 @@
+[
+  {
+    "title": "John Bartmann Content Creative",
+    "description": "ReactJS site with audio player",
+    "link": "https://johnbartmann.com",
+    "id": 9
+  },
+  {
+    "title": "Crwn Clothing",
+    "description": "Online store with Firebase user authentication and social login",
+    "link": "https://crwnfashion.netlify.app/",
+    "id": 5
+  },
+  {
+    "title": "Harsh Reality",
+    "description": "Redux counter app which tells you how rich you are when you die",
+    "link": "https://harshreality.netlify.app/",
+    "id": 4
+  },
+  {
+    "title": "TeachTech",
+    "description": "One-page corporate brochure website",
+    "link": "https://elegant-chebakia-666a3b.netlify.app/",
+    "id": 6
+  },
+  {
+    "title": "Whether: The World's #1 Weather App",
+    "description": "Basic weather app with API data fetching",
+    "link": "https://sprightly-dragon-a02641.netlify.app/",
+    "id": 0
+  },
+  {
+    "title": "To-Do list",
+    "description": "Basic vanilla JS to-do list",
+    "link": "https://musical-dasik-1b22cc.netlify.app/",
+    "id": 1
+  },
+  {
+    "title": "Rock Paper Scissors",
+    "description": "Basica vanilla JS game with retro visual theme",
+    "link": "https://animated-mooncake-37e518.netlify.app/",
+    "id": 2
+  },
+  {
+    "title": "Needledrop",
+    "description": "Basic podcast website template with sticky audio player and API data fetching",
+    "link": "https://adorable-sherbet-f9ff21.netlify.app/",
+    "id": 3
+  },
+  {
+    "title": "Wellness Practitioner",
+    "description": "Stylish, one-page visual business card site with conditional horizontal sliders",
+    "link": "https://radiant-custard-208af9.netlify.app/",
+    "id": 7
+  },
+  {
+    "title": "Airfry South Africa",
+    "description": "Industrial product listing site with slideshow",
+    "link": "https://beautiful-biscotti-c895ca.netlify.app/",
+    "id": 8
+  }
+]
