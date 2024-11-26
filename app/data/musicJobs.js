@@ -52,10 +52,8 @@ const musicJobs = [
   },
 ];
 
-return (
-  <div className="single-page-container">
-    <h1>MUSIC</h1>
-    {/*
+/*
+{
             {musicJobs.map((job) => {
               return Card(
                 job.title,
@@ -185,6 +183,6 @@ return (
               <a href="https://dukesofnote.com/" target="_blank">
                 The Dukes of Note - carnival rock
               </a>
-            </h4> */}
-  </div>
-);
+            </h4> 
+          }
+          */
