@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import DownloadModal from "../components/DownloadModal.js";
+import Tooltip from "../components/Tooltip.js";
 import WaveSurfer from "wavesurfer.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { IoMdDownload } from "react-icons/io";
 import { PiYoutubeLogo } from "react-icons/pi";
 import { PiDiceFiveFill } from "react-icons/pi";
-import "../styles/AudioWaveform.styles.css";
+import "../styles/MusicListPlayer.styles.css";
 
-const AudioWaveform = ({ musicTracks }) => {
+const MusicListPlayer = ({ musicTracks }) => {
   const wavesurferRef = useRef(null);
   const wavesurferObjRef = useRef(null);
   const [currentAudio, setCurrentAudio] = useState();
@@ -151,6 +152,7 @@ const AudioWaveform = ({ musicTracks }) => {
 
   const openModal = (id) => {
     setSelectedTrackId(id);
+    console.log(id);
     setIsModalOpen(true);
   };
 
@@ -208,7 +210,7 @@ const AudioWaveform = ({ musicTracks }) => {
                           <div className="flex items-center justify-center">
                             <div
                               onClick={(e) => {
-                                e.stopPropagation(); // Stop event propagation
+                                e.stopPropagation();
                                 openModal(musicTrack.id);
                               }}
                             >
@@ -254,11 +256,13 @@ const AudioWaveform = ({ musicTracks }) => {
                   {currentTitle}
                 </div>
               </div>
-              <div className="relative flex items-center text-4xl m-2 hover:scale-125">
-                <span onClick={() => selectRandom({ musicTracks })}>
-                  <PiDiceFiveFill />
-                </span>
-              </div>
+              <Tooltip text="Play random track">
+                <div className="relative flex items-center text-4xl m-2 hover:scale-125">
+                  <span onClick={() => selectRandom({ musicTracks })}>
+                    <PiDiceFiveFill />
+                  </span>
+                </div>
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -267,4 +271,4 @@ const AudioWaveform = ({ musicTracks }) => {
   );
 };
 
-export default AudioWaveform;
+export default MusicListPlayer;

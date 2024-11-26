@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import Navbar from "../components/Navbar.js";
-import AudioWaveform from "../components/AudioWaveform.js";
+import MusicListPlayer from "./MusicListPlayer.js";
 import musicTracks from "../data/musicTracks.json";
 import MusicSocials from "./MusicSocials.js";
 import MusicSubMenu from "./MusicSubMenu.js";
@@ -25,7 +25,7 @@ const Music = () => {
       <div className="single-page-container">
         <MusicSocials />
         <MusicIntroText />
-        <AudioWaveform musicTracks={musicTracks} clickHandle={clickHandle} />
+        <MusicListPlayer musicTracks={musicTracks} clickHandle={clickHandle} />
         <MusicSubMenu />
       </div>
     </div>

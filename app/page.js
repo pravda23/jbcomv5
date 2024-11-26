@@ -1,4 +1,3 @@
-import Link from "next/link";
 import NavbarHome from "./components/NavbarHome.js";
 import ButtonLarge from "./components/ButtonLarge.js";
 
