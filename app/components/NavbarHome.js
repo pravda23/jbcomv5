@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useRef } from "react";
 import { FaEnvelope, FaWhatsapp, FaLinkedin } from "react-icons/fa";
 import "../styles/App.styles.scss";
