@@ -1,6 +1,7 @@
 import { FaSpotify } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaBandcamp } from "react-icons/fa";
+import { FaBluesky } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa";
 import PageHeadingTitle from "../components/PageHeadingTitle.js";
 
@@ -15,6 +16,10 @@ const MusicSocials = () => {
           <a href="https://youtube.com/johnbartmannmusic" target="_blank">
             <FaYoutube className="m-2 hover:scale-125 w-8 h-8 text-white" />
           </a>
+          <a href="https://johnbartmann.bsky.social" target="_blank">
+            <FaBluesky className="m-2 hover:scale-125 w-8 h-8 text-white" />
+          </a>
+
           <a
             href="https://open.spotify.com/artist/3ZkQ69zxOePFLOGLj0N15C"
             target="_blank"

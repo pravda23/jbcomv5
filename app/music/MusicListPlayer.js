@@ -163,10 +163,7 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   return (
     <>
-      <div>
-        {/* <div className="grid grid-cols-[210px_10fr_4fr] text-zinc-800 gap-2 max-w-screen-lg lg:grid-cols-[520px_6fr_1fr] overflow-x-hidden font-bold bg-zinc-200 fixed audio-list-titles"> */}
-
-        {/* </div> */}
+      <div className="flex-grow overflow-auto">
         <div className="flex justify-center">
           <div className="flex justify-between">
             <div className="grid grid-cols-[220px_3fr_1fr] gap-2 max-w-screen-lg lg:grid-cols-[520px_3fr_1fr]">

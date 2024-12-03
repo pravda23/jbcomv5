@@ -10,8 +10,12 @@ const MusicIntroText = () => {
       >
         Creative Commons
       </a>{" "}
-      music tracks for your vids, games and more. For commission inquiries and
-      commercial rates, <a href="/contact">contact me</a>.
+      music tracks for videos, games and more. Support my work and get Ableton
+      Live project files on{" "}
+      <a href="https://patreon.com/johnbartmann" target="_blank">
+        Patreon
+      </a>
+      . <a href="/contact">Contact</a> for commissions & inquiries.
     </p>
   );
 };

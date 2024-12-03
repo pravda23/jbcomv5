@@ -1,23 +1,7 @@
-import {
-  FaEnvelope,
-  FaArrowRight,
-  FaWhatsapp,
-  FaLinkedin,
-} from "react-icons/fa";
-import "../styles/App.styles.scss";
-
 const Footer = () => {
   return (
-    <div className="footer">
-      <a href="mailto:hi@johnbartmann.com" target="_blank">
-        <FaEnvelope className="m-1" fontSize="1.5rem" />
-      </a>
-      <a href="https://wa.link/h4thrk" target="_blank">
-        <FaWhatsapp className="m-1" fontSize="1.5rem" />
-      </a>
-      <a href="https://www.linkedin.com/in/johnbartmann/" target="_blank">
-        <FaLinkedin className="m-1" fontSize="1.5rem" />
-      </a>
+    <div className="relative bottom-0 left-0 flex justify-center text-xs text-yellow text-center p-2 text-[calc(10px+0.3rem)] border-t border-white">
+      © 2024 John Bartmann
     </div>
   );
 };

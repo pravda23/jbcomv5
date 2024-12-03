@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useRef } from "react";
-import { FaEnvelope, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 import "../styles/App.styles.scss";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -43,6 +43,9 @@ const Navbar = () => {
           >
             <FaLinkedin className="m-2" fontSize="1rem" />
           </Link>
+          <Link href="https://github.com/pravda23/" target="_blank">
+            <FaGithub className="m-2" fontSize="1rem" />
+          </Link>
         </div>
       </div>
 
@@ -68,9 +71,6 @@ const Navbar = () => {
               <h1 className="btn-nav">MUSIC</h1>
             </a>
 
-            <a href="/about">
-              <h1 className="btn-nav">ABOUT</h1>
-            </a>
             <a ref={rightChevron} href="/contact">
               {" "}
               <h1 className="btn-nav">CONTACT</h1>

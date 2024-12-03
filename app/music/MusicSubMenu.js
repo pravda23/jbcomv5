@@ -5,12 +5,6 @@ const MusicSubMenu = () => {
   return (
     <div className="flex flex-col items-center justify-center pr-2 pl-2">
       <div>
-        <div className="ps">
-          Support my work and get Ableton Live project files on{" "}
-          <a href="https://patreon.com/johnbartmann" target="_blank">
-            Patreon.
-          </a>
-        </div>
         <span>
           <ButtonSmall text={"USAGE FAQ"} link={"/faq"} size={"0.8"} />
           <ButtonSmall

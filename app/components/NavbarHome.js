@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useRef } from "react";
-import { FaEnvelope, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 import "../styles/App.styles.scss";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -26,9 +26,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between items-end mh-6 w-full p-2 mb-2 ">
+      <div className="flex justify-between items-end mh-6 w-full p-4 mb-2 ">
         <Link className="text-white" href="/">
-          <div className="flex flex-col flex-end">JOHN BARTMANN</div>
+          <div className="flex flex-col flex-end text-2xl">JOHN BARTMANN</div>
         </Link>
         <div className="flex">
           <Link href="mailto:hi@johnbartmann.com" target="_blank">
@@ -42,6 +42,9 @@ const Navbar = () => {
             target="_blank"
           >
             <FaLinkedin className="m-2" fontSize="1rem" />
+          </Link>
+          <Link href="https://github.com/pravda23/" target="_blank">
+            <FaGithub className="m-2" fontSize="1rem" />
           </Link>
         </div>
       </div>

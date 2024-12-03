@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.js";
 import PageHeadingTitle from "../components/PageHeadingTitle.js";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import Faq from "react-faq-component";
+import Footer from "../components/Footer.js";
 import "../styles/App.styles.css";
 
 const data = {
@@ -179,6 +180,7 @@ const FAQ = () => {
           <Faq data={data} styles={styles} config={config} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

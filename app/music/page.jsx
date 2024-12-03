@@ -6,7 +6,7 @@ import musicTracks from "../data/musicTracks.json";
 import MusicSocials from "./MusicSocials.js";
 import MusicSubMenu from "./MusicSubMenu.js";
 import MusicIntroText from "./MusicIntroText.js";
-
+import Footer from "../components/Footer.js";
 import "../styles/App.styles.scss";
 
 const Music = () => {
@@ -27,6 +27,7 @@ const Music = () => {
         <MusicIntroText />
         <MusicListPlayer musicTracks={musicTracks} clickHandle={clickHandle} />
         <MusicSubMenu />
+        <Footer />
       </div>
     </div>
   );

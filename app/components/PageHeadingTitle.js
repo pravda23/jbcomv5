@@ -3,12 +3,12 @@ const PageHeadingTitle = ({ title, margin }) => {
     <>
       {title === "MUSIC" ? (
         <div>
-          <span>MUSIC</span>
+          <span className="text-xl">MUSIC</span>
         </div>
       ) : (
         <div>
           <span
-            className={`${margin} flex flex-col border-b-2 border-slate-200 justify-start`}
+            className={`${margin} text-xl flex flex-col border-b-2 border-slate-200 justify-start`}
           >
             {title}
           </span>

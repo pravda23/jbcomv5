@@ -3,7 +3,7 @@ const ButtonLarge = ({ text, link, target }) => {
     <>
       {/* <div > */}
       <a
-        className="m-2 p-4 text-xl hover:border-yellow  border-2 border-slate-800 border-2 border-slate-700 rounded-md"
+        className="m-2 p-4 text-xl border-2 rounded-md hover:border-yellow"
         href={link}
         target={target}
       >
