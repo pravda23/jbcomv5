@@ -50,7 +50,7 @@ export default function HomePage() {
             <div key={post.id} className="mb-10 border-b pb-5">
               <h2 className="text-xl font-semibold">{post.title.rendered}</h2>
               <a
-                href={`${process.env.WORDPRESS_API_URL}/${post.slug}`}
+                href={`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/${post.slug}`}
                 className="text-secondarylight"
               >
                 Read More
@@ -64,13 +64,23 @@ export default function HomePage() {
             className="px-4 pb-6 bg-gray-200 text-gray-700 rounded disabled:opacity-50"
             disabled={currentPage === 1}
           >
-            <BsChevronLeft />
+            <div className="flex items-center space-x-2">
+              <div className="inline-block">
+                <BsChevronLeft />
+              </div>{" "}
+              <div className="inline-block">PREV</div>
+            </div>
           </button>
           <button
             onClick={handleNext}
             className="px-4 pb-6 bg-gray-200 text-gray-700 rounded"
           >
-            <BsChevronRight />
+            <div className="flex items-center space-x-2">
+              <div className="inline-block">NEXT</div>
+              <div className="inline-block">
+                <BsChevronRight />
+              </div>{" "}
+            </div>
           </button>
         </div>
       </main>

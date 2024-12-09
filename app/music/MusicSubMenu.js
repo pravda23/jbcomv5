@@ -3,7 +3,12 @@ import "../styles/App.styles.scss";
 
 const MusicSubMenu = () => {
   return (
-    <div className="flex flex-col items-center justify-center pr-2 pl-2">
+    <div className="flex flex-col items-center justify-center my-4 px-2">
+      <div>
+        <p>
+          Download Creative Commons music tracks for videos, games and more.
+        </p>
+      </div>
       <div>
         <span>
           <ButtonSmall text={"USAGE FAQ"} link={"/faq"} size={"0.8"} />

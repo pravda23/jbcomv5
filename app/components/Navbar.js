@@ -28,7 +28,9 @@ const Navbar = () => {
     <>
       <div className="flex justify-between items-end mh-6 w-full p-2 mb-2 ">
         <Link className="text-white" href="/">
-          <div className="flex flex-col flex-end">JOHN BARTMANN</div>
+          <div className="flex flex-col flex-end text-2xl font-bold">
+            JOHN BARTMANN
+          </div>
         </Link>
         <div className="flex">
           <Link href="mailto:hi@johnbartmann.com" target="_blank">

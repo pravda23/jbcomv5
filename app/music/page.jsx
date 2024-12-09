@@ -5,7 +5,6 @@ import MusicListPlayer from "./MusicListPlayer.js";
 import musicTracks from "../data/musicTracks.json";
 import MusicSocials from "./MusicSocials.js";
 import MusicSubMenu from "./MusicSubMenu.js";
-import MusicIntroText from "./MusicIntroText.js";
 import Footer from "../components/Footer.js";
 import "../styles/App.styles.scss";
 
@@ -24,10 +23,8 @@ const Music = () => {
       <Navbar />
       <div className="single-page-container">
         <MusicSocials />
-        <MusicIntroText />
-        <MusicListPlayer musicTracks={musicTracks} clickHandle={clickHandle} />
         <MusicSubMenu />
-        <Footer />
+        <MusicListPlayer musicTracks={musicTracks} clickHandle={clickHandle} />
       </div>
     </div>
   );
