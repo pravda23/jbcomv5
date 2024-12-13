@@ -23,5 +23,5 @@ export function middleware(request) {
 console.log("test middleware.js");
 
 export const config = {
-  matcher: "/lib/api/*", // Apply middleware only to API routes
+  matcher: ["/api/*"], // Apply middleware to all API routes (using /**)
 };
