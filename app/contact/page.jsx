@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 
 const Contact = () => {
+  console.log("contact");
   return (
     <>
       <Navbar />
