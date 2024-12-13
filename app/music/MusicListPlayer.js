@@ -98,6 +98,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     setAbortController(controller);
 
     fetch(`https://johnbartmann.com/track/${musicTrack.url_slug}.mp3`, {
+      mode: "no-cors",
       signal: controller.signal,
     })
       .then((response) => response.blob())
