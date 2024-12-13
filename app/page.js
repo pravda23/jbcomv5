@@ -3,6 +3,7 @@ import Footer from "./components/Footer.js";
 import ButtonLarge from "./components/ButtonLarge.js";
 
 const Home = () => {
+  console.log("updated");
   return (
     <>
       <div className="flex flex-col min-h-screen">
