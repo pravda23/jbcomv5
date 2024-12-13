@@ -20,6 +20,8 @@ export function middleware(request) {
   return response;
 }
 
+console.log("test middleware.js");
+
 export const config = {
   matcher: "/lib/api/*", // Apply middleware only to API routes
 };
