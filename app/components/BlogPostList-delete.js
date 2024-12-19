@@ -7,20 +7,34 @@ import BlogPost from "./BlogPost.component";
 const BlogPostList = () => {
   const [posts, setPosts] = useState(null);
 
+  // request data from /pages/api/proxy.js and not REST API
+  const fetchPosts = async () => {
+    const response = await fetch("/api/proxy?endpoint=/wp/v2/posts");
+    if (!response.ok) {
+      throw new Error("Failed to fetch posts");
+    }
+    return response.json();
+  };
+
   useEffect(() => {
-    fetch(
-      `https://johnbartmann.com/creative-commons-music/wp-json/wp/v2/posts?per_page=3`
-    )
-      .then((response) => response.json())
+    fetchPosts()
       .then((data) => setPosts(data))
-      .catch((error) => console.error("Error fetching post:", error));
+      .catch((error) => console.error(error));
   }, []);
 
-  if (!posts) {
-    return <div className="center">Loading...</div>;
-  }
+  // request data directly from REST API
+  // useEffect(() => {
+  //   fetch(
+  //     `https://johnbartmann.com/creative-commons-music/wp-json/wp/v2/posts?per_page=3`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => setPosts(data))
+  //     .catch((error) => console.error("Error fetching post:", error));
+  // }, []);
 
-  console.log();
+  // if (!posts) {
+  //   return <div className="center">Loading...</div>;
+  // }
 
   return (
     <>
