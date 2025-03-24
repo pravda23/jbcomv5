@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 const PageHeadingTitle = ({ title, margin }) => {
   return (
@@ -6,7 +7,7 @@ const PageHeadingTitle = ({ title, margin }) => {
         <>
           <div className="fixed top-5 left-0">
             <span>
-              <a href="/">
+              <Link href="/">
                 <BsChevronLeft
                   style={{
                     fontSize: "20px",
@@ -15,7 +16,7 @@ const PageHeadingTitle = ({ title, margin }) => {
                     marginRight: "20px",
                   }}
                 />
-              </a>
+              </Link>
             </span>
           </div>
           <div>
