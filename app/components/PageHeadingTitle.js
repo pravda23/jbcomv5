@@ -1,10 +1,34 @@
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 const PageHeadingTitle = ({ title, margin }) => {
   return (
     <>
       {title === "MUSIC" ? (
-        <div>
-          <span className="text-xl">MUSIC</span>
-        </div>
+        <>
+          <div className="fixed top-5 left-0">
+            <span>
+              <a href="/">
+                <BsChevronLeft
+                  style={{
+                    fontSize: "20px",
+                    display: "inline",
+                    marginBottom: "7px",
+                    marginRight: "20px",
+                  }}
+                />
+              </a>
+            </span>
+          </div>
+          <div>
+            <span
+              className="text-responsive"
+              style={{
+                whiteSpace: "nowrap", // Prevent text wrapping
+              }}
+            >
+              JOHN BARTMANN FREE MUSIC
+            </span>
+          </div>
+        </>
       ) : (
         <div>
           <span

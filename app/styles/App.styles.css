@@ -8,11 +8,19 @@
   --color-dark-trans: hsl(204, 56%, 27%);
   --color-neutral-trans: hsl(59, 67%, 12%);
   --black: #272727;
+  height: 100%;
 }
 
 * {
   box-sizing: border-box;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .center {
@@ -170,7 +178,6 @@ a:hover {
 
 .navbar-scroll-anchor-left {
   position: fixed;
-  border: 1px solid red;
   left: 20;
   width: 20px;
   height: 30px;

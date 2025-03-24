@@ -5,9 +5,7 @@ const MusicSubMenu = () => {
   return (
     <div className="flex flex-col items-center justify-center my-4 px-2">
       <div>
-        <p>
-          Download Creative Commons music tracks for videos, games and more.
-        </p>
+        Download Creative Commons music tracks for videos, games and more.
       </div>
       <div>
         <span>

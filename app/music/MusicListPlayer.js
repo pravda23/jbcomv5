@@ -28,7 +28,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     let selectedTrack =
       musicTracks[Math.floor(Math.random() * musicTracks.length)];
     setCurrentAudio(
-      `https://johnbartmann.com/track/${selectedTrack.url_slug}-sample.mp3`
+      `https://johnbartmann.com/track/${selectedTrack.url_slug}-master.mp3`
     );
     setCurrentTitle(selectedTrack.title);
   };
@@ -97,7 +97,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    fetch(`https://johnbartmann.com/track/${musicTrack.url_slug}.mp3`, {
+    fetch(`https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`, {
       mode: "no-cors",
       signal: controller.signal,
     })
@@ -117,7 +117,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     // load track
     if (
       currentAudio ===
-      `https://johnbartmann.com/track/${musicTrack.url_slug}.mp3`
+      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
     ) {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
@@ -131,7 +131,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     }
     setCurrentTitle(musicTrack.title);
     setCurrentAudio(
-      `https://johnbartmann.com/track/${musicTrack.url_slug}-sample.mp3`
+      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
     );
   };
 

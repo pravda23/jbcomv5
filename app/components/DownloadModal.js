@@ -11,13 +11,13 @@ const DownloadModal = ({ musicTrack, onClose }) => {
 
   const handleDownload = async () => {
     const response = await fetch(
-      `https://johnbartmann.com/track/${musicTrack.url_slug}-sample.mp3`
+      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
     );
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${musicTrack.title}.mp3`;
+    a.download = `${musicTrack.url_slug}-master.mp3`;
     document.body.appendChild(a);
     a.click();
     a.remove();

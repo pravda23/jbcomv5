@@ -20,7 +20,7 @@ const Music = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="single-page-container">
         <MusicSocials />
         <MusicSubMenu />

@@ -8,7 +8,7 @@ import PageHeadingTitle from "../components/PageHeadingTitle.js";
 const MusicSocials = () => {
   return (
     <>
-      <div className="mt-2 flex items-center justify-between border-b-2 border-slate-200 ">
+      <div className="music-socials mt-2 flex flex-col sm:flex-row items-center justify-between border-b-2 border-slate-200">
         <div>
           <PageHeadingTitle title={"MUSIC"} />
         </div>
@@ -17,17 +17,17 @@ const MusicSocials = () => {
             <FaYoutube className="m-2 hover:scale-125 w-8 h-8 text-white" />
           </a>
           <a href="https://johnbartmann.bsky.social" target="_blank">
-            <FaBluesky className="m-2 hover:scale-125 w-8 h-8 text-white" />
+            <FaBluesky className="m-2 hover:scale-125 w-7 h-7 text-white" />
           </a>
 
           <a
             href="https://open.spotify.com/artist/3ZkQ69zxOePFLOGLj0N15C"
             target="_blank"
           >
-            <FaSpotify className="m-2 hover:scale-125 w-8 text-white" />
+            <FaSpotify className="m-2 hover:scale-125 w-8 h-8 text-white" />
           </a>
           <a href="https://johnbartmann.bandcamp.com/" target="_blank">
-            <FaBandcamp className="m-2 hover:scale-125 w-8 text-white" />
+            <FaBandcamp className="m-2 hover:scale-125 w-8 h-8 text-white" />
           </a>
           <a
             href="https://music.apple.com/us/artist/john-bartmann/1081298778"
