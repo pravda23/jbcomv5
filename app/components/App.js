@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import "../styles/App.styles.scss";
 import ReactGA from "react-ga4";
@@ -19,31 +20,40 @@ function App() {
   ReactGA.initialize("G-0FBV9Z3D2X");
 
   return (
-    <div className="content-container">
-      <div className="overlay">
-        <div className="app-container hiddenscrollbars">
-          <div className="flex justify-between items-end mh-6 w-full p-2 mb-2 ">
-            <Link className="text-white" href="/">
-              <div className="flex flex-col flex-end">JOHN BARTMANN</div>
-            </Link>
-            <div className="flex">
-              <Link href="mailto:hi@johnbartmann.com" target="_blank">
-                <FaEnvelope className="m-2" fontSize="1rem" />
+    <>
+      <Head>
+        <title>John Bartmann | Creative Portfolio</title>
+        <meta
+          name="description"
+          content="Creative portfolio of John Bartmann, a South African web developer and music producer."
+        />
+      </Head>
+      <div className="content-container">
+        <div className="overlay">
+          <div className="app-container hiddenscrollbars">
+            <div className="flex justify-between items-end mh-6 w-full p-2 mb-2 ">
+              <Link className="text-white" href="/">
+                <div className="flex flex-col flex-end">JOHN BARTMANN</div>
               </Link>
-              <Link href="https://wa.link/h4thrk" target="_blank">
-                <FaWhatsapp className="m-2" fontSize="1rem" />
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/johnbartmann/"
-                target="_blank"
-              >
-                <FaLinkedin className="m-2" fontSize="1rem" />
-              </Link>
+              <div className="flex">
+                <Link href="mailto:hi@johnbartmann.com" target="_blank">
+                  <FaEnvelope className="m-2" fontSize="1rem" />
+                </Link>
+                <Link href="https://wa.link/h4thrk" target="_blank">
+                  <FaWhatsapp className="m-2" fontSize="1rem" />
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/in/johnbartmann/"
+                  target="_blank"
+                >
+                  <FaLinkedin className="m-2" fontSize="1rem" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 export default App;
