@@ -10,9 +10,7 @@ const DownloadModal = ({ musicTrack, onClose }) => {
   };
 
   const handleDownload = async () => {
-    const response = await fetch(
-      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
-    );
+    const response = await fetch(`/track/${musicTrack.url_slug}-master.mp3`);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");

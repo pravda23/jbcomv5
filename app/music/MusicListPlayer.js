@@ -5,8 +5,10 @@ import WaveSurfer from "wavesurfer.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { IoMdDownload } from "react-icons/io";
 import { PiYoutubeLogo } from "react-icons/pi";
-import { PiDiceFiveFill } from "react-icons/pi";
+import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
+
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const MusicListPlayer = ({ musicTracks }) => {
   const wavesurferRef = useRef(null);
@@ -27,9 +29,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   const selectRandom = ({ musicTracks }) => {
     let selectedTrack =
       musicTracks[Math.floor(Math.random() * musicTracks.length)];
-    setCurrentAudio(
-      `https://johnbartmann.com/track/${selectedTrack.url_slug}-master.mp3`
-    );
+    setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
     setCurrentTitle(selectedTrack.title);
   };
 
@@ -97,8 +97,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    fetch(`https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`, {
-      mode: "no-cors",
+    fetch(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`, {
       signal: controller.signal,
     })
       .then((response) => response.blob())
@@ -115,10 +114,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       });
 
     // load track
-    if (
-      currentAudio ===
-      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
-    ) {
+    if (currentAudio === `${baseUrl}/track/${musicTrack.url_slug}-master.mp3`) {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
         setIsPlaying(true);
@@ -130,9 +126,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
     setCurrentTitle(musicTrack.title);
-    setCurrentAudio(
-      `https://johnbartmann.com/track/${musicTrack.url_slug}-master.mp3`
-    );
+    setCurrentAudio(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`);
   };
 
   const handleAudioPlayPause = () => {
@@ -254,13 +248,13 @@ const MusicListPlayer = ({ musicTracks }) => {
                   {currentTitle}
                 </div>
               </div>
-              <Tooltip text="Play random track">
-                <div className="relative flex items-center text-4xl m-2 hover:scale-125">
-                  <span onClick={() => selectRandom({ musicTracks })}>
-                    <PiDiceFiveFill />
-                  </span>
-                </div>
-              </Tooltip>
+              {/* <Tooltip text="Play random track"> */}
+              <div className="relative flex items-center text-4xl m-2 hover:scale-125">
+                <span onClick={() => selectRandom({ musicTracks })}>
+                  <PiDiceFive />
+                </span>
+              </div>
+              {/* </Tooltip> */}
             </div>
           </div>
         </div>
