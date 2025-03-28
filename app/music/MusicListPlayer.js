@@ -106,10 +106,10 @@ const MusicListPlayer = ({ musicTracks }) => {
     setAbortController(controller);
 
     fetch(
-      `${apiPath}`
-      //   {
-      //   signal: controller.signal,
-      // }
+      (`${apiPath}`,
+      {
+        signal: controller.signal,
+      })
     )
       .then((response) => response.blob())
       .then((blob) => {
