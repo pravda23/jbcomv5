@@ -110,9 +110,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       .catch((error) => console.error("Audio fetch error:", error));
 
     // load track
-    if (
-      currentAudio === `${subdomainUrl}/track/${musicTrack.url_slug}-master.mp3`
-    ) {
+    if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
         setIsPlaying(true);
@@ -124,7 +122,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
     setCurrentTitle(musicTrack.title);
-    setCurrentAudio(`${subdomainUrl}/track/${musicTrack.url_slug}-master.mp3`);
+    setCurrentAudio(`${subdomainUrl}/${musicTrack.url_slug}-master.mp3`);
   };
 
   const handleAudioPlayPause = () => {

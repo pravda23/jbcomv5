@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
   const { path } = req.query;
+  console.log(path);
 
   if (!path) {
     return res.status(400).send("Invalid request");
