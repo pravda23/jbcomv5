@@ -97,21 +97,32 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    fetch(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`, {
+    // fetch(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`, {
+    //   signal: controller.signal,
+    // })
+    //   .then((response) => response.blob())
+    //   .then((blob) => {
+    //     const audioURL = URL.createObjectURL(blob);
+    //     // Load the audio URL into your audio player
+    //   })
+    //   .catch((error) => {
+    //     if (error.name === "AbortError") {
+    //       console.log("Request aborted");
+    //     } else {
+    //       console.error("Fetch error:", error);
+    //     }
+    //   });
+
+    fetch(`/api/track/${musicTrack.url_slug}-master.mp3`, {
       signal: controller.signal,
     })
       .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
-        // Load the audio URL into your audio player
+        console.log("blob: " + { blob });
+        console.log(blob.media.audio);
       })
-      .catch((error) => {
-        if (error.name === "AbortError") {
-          console.log("Request aborted");
-        } else {
-          console.error("Fetch error:", error);
-        }
-      });
+      .catch((error) => console.error("Audio fetch error:", error));
 
     // load track
     if (currentAudio === `${baseUrl}/track/${musicTrack.url_slug}-master.mp3`) {
