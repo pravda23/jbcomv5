@@ -8,9 +8,9 @@ import { PiYoutubeLogo } from "react-icons/pi";
 import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 const MusicListPlayer = ({ musicTracks }) => {
+  const subdomainUrl = process.env.NEXT_PUBLIC_API_SUBDOMAIN_URL;
+
   const wavesurferRef = useRef(null);
   const wavesurferObjRef = useRef(null);
   const [currentAudio, setCurrentAudio] = useState();
@@ -26,12 +26,12 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   musicTracks.sort((a, b) => b.rank - a.rank);
 
-  const selectRandom = ({ musicTracks }) => {
-    let selectedTrack =
-      musicTracks[Math.floor(Math.random() * musicTracks.length)];
-    setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
-    setCurrentTitle(selectedTrack.title);
-  };
+  // const selectRandom = ({ musicTracks }) => {
+  //   let selectedTrack =
+  //     musicTracks[Math.floor(Math.random() * musicTracks.length)];
+  //   setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
+  //   setCurrentTitle(selectedTrack.title);
+  // };
 
   useEffect(() => {
     if (currentAudio === undefined) {
@@ -90,6 +90,8 @@ const MusicListPlayer = ({ musicTracks }) => {
   }, [currentAudio, currentTitle]);
 
   const handleAudioSelect = ({ musicTrack }) => {
+    const apiPath = `/api/track/${musicTrack.url_slug}-master.mp3`;
+
     if (abortController) {
       abortController.abort(); // Abort any ongoing request
     }
@@ -97,35 +99,20 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    // fetch(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`, {
-    //   signal: controller.signal,
-    // })
-    //   .then((response) => response.blob())
-    //   .then((blob) => {
-    //     const audioURL = URL.createObjectURL(blob);
-    //     // Load the audio URL into your audio player
-    //   })
-    //   .catch((error) => {
-    //     if (error.name === "AbortError") {
-    //       console.log("Request aborted");
-    //     } else {
-    //       console.error("Fetch error:", error);
-    //     }
-    //   });
-
-    fetch(`/api/track/${musicTrack.url_slug}-master.mp3`, {
+    fetch(`${apiPath}`, {
       signal: controller.signal,
     })
       .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
-        console.log("blob: " + { blob });
-        console.log(blob.media.audio);
+        console.log("audioURL: " + audioURL);
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
     // load track
-    if (currentAudio === `${baseUrl}/track/${musicTrack.url_slug}-master.mp3`) {
+    if (
+      currentAudio === `${subdomainUrl}/track/${musicTrack.url_slug}-master.mp3`
+    ) {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
         setIsPlaying(true);
@@ -137,7 +124,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
     setCurrentTitle(musicTrack.title);
-    setCurrentAudio(`${baseUrl}/track/${musicTrack.url_slug}-master.mp3`);
+    setCurrentAudio(`${subdomainUrl}/track/${musicTrack.url_slug}-master.mp3`);
   };
 
   const handleAudioPlayPause = () => {

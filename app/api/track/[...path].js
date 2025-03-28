@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   // Construct the Hostinger URL dynamically
-  const hostingerUrl = `https://johnbartmann.com/track/${path.join("/")}`;
+  const hostingerUrl = `https://track.johnbartmann.com/${path.join("/")}`;
 
   console.log("Fetching from Hostinger:", hostingerUrl);
 
