@@ -99,13 +99,16 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
-    fetch(`${apiPath}`, {
-      signal: controller.signal,
-    })
+    fetch(
+      `${apiPath}`
+      //   {
+      //   signal: controller.signal,
+      // }
+    )
       .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
-        console.log("audioURL: " + audioURL);
+        console.log({ audioURL });
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
@@ -116,7 +119,6 @@ const MusicListPlayer = ({ musicTracks }) => {
         setIsPlaying(true);
       } else {
         wavesurferObjRef.current.play();
-        console.log(wavesurferObjRef.current);
         setIsPlaying(false);
       }
       return;
@@ -143,7 +145,6 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   const openModal = (id) => {
     setSelectedTrackId(id);
-    console.log(id);
     setIsModalOpen(true);
   };
 
