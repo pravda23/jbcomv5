@@ -1,6 +1,11 @@
 export default async function handler(req, res) {
   const { path } = req.query;
-  console.log(path);
+
+  if (!slug) {
+    res.status(400).json({ error: "Missing slug parameter" });
+    return;
+  }
+  console.log("path: " + path);
 
   if (!path) {
     return res.status(400).send("Invalid request");
@@ -20,6 +25,8 @@ export default async function handler(req, res) {
     }
 
     // Set headers from the Hostinger response
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
     res.setHeader("Content-Type", response.headers.get("Content-Type"));
     res.setHeader("Content-Length", response.headers.get("Content-Length"));
 

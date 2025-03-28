@@ -90,6 +90,12 @@ const MusicListPlayer = ({ musicTracks }) => {
   }, [currentAudio, currentTitle]);
 
   const handleAudioSelect = ({ musicTrack }) => {
+    if (!musicTrack || !musicTrack.url_slug) {
+      console.error("Invalid musicTrack: ", musicTrack);
+      alert("Track information is missing.");
+      return;
+    }
+
     const apiPath = `/api/track/${musicTrack.url_slug}-master.mp3`;
 
     if (abortController) {
@@ -108,7 +114,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
-        console.log({ audioURL });
+        console.log(audioURL);
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
