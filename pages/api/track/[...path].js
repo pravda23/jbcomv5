@@ -3,12 +3,11 @@ export default async function handler(req, res) {
   console.log("req.query:", req.query);
   console.log("path:", path);
 
-  if (!slug) {
-    res.status(400).json({ error: "Missing slug parameter" });
+  if (!path) {
+    console.error("Path is undefined. req.query:", req.query);
+    res.status(400).json({ error: "Missing path parameter" });
     return;
   }
-  console.log("req.query:", req.query);
-  console.log("path: " + path);
 
   if (!path) {
     console.error("Path is undefined. req.query:", req.query);
@@ -37,7 +36,7 @@ export default async function handler(req, res) {
 
     // Stream the response properly
     const stream = response.body;
-    stream.pipeTo(res);
+    stream.pipe(res);
   } catch (error) {
     console.error("Proxy error:", error);
     res.status(500).send("Server error");

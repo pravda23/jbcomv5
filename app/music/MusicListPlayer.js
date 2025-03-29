@@ -14,9 +14,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   const wavesurferRef = useRef(null);
   const wavesurferObjRef = useRef(null);
   const [currentAudio, setCurrentAudio] = useState();
-  const [currentTitle, setCurrentTitle] = useState(
-    "Select a track from the list"
-  );
+  const [currentTitle, setCurrentTitle] = useState(null);
   const [playingState, setPlayingState] = useState("notStarted");
   const [isPlaying, setIsPlaying] = useState(false);
   const [loadingState, setLoadingState] = useState();
@@ -42,13 +40,11 @@ const MusicListPlayer = ({ musicTracks }) => {
       container: wavesurferRef.current,
       waveColor: "white",
       progressColor: "#2665ad",
-      // background: "#242424",
       responsive: true,
       height: 1,
       barGap: 0,
       barAlign: "top",
       barWidth: 1,
-      // barRadius: 10,
       minPxPerSec: 1,
     });
 
@@ -91,8 +87,10 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   const handleAudioSelect = ({ musicTrack }) => {
     if (!musicTrack || !musicTrack.url_slug) {
-      console.error("Invalid musicTrack:", musicTrack);
-      alert("Track information is missing.");
+      console.error(
+        "Track information is missing. Invalid musicTrack: ",
+        musicTrack
+      );
       return;
     }
 
@@ -105,6 +103,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
+    console.log("Fetching from API path:", apiPath);
     fetch(apiPath, {
       signal: controller.signal,
     })
@@ -120,7 +119,28 @@ const MusicListPlayer = ({ musicTracks }) => {
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
+    // load track
+    if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
+      console.log(
+        "currentAudio === " +
+          `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`
+      );
+      if (playingState === "play") {
+        wavesurferObjRef.current.pause();
+        setIsPlaying(true);
+      } else {
+        wavesurferObjRef.current.play();
+        setIsPlaying(false);
+      }
+      return;
+    } else {
+      console.log(
+        "currentAudio !== " +
+          `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`
+      );
+    }
     setCurrentTitle(musicTrack.title);
+    setCurrentAudio(`${subdomainUrl}/${musicTrack.url_slug}-master.mp3`);
   };
 
   const handleAudioPlayPause = () => {
