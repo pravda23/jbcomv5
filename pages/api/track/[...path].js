@@ -1,5 +1,7 @@
 export default async function handler(req, res) {
   const { path } = req.query;
+  console.log("req.query:", req.query);
+  console.log("path:", path);
 
   if (!slug) {
     res.status(400).json({ error: "Missing slug parameter" });

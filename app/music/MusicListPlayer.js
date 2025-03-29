@@ -91,7 +91,7 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   const handleAudioSelect = ({ musicTrack }) => {
     if (!musicTrack || !musicTrack.url_slug) {
-      console.error("Invalid musicTrack: ", musicTrack);
+      console.error("Invalid musicTrack:", musicTrack);
       alert("Track information is missing.");
       return;
     }
@@ -104,31 +104,23 @@ const MusicListPlayer = ({ musicTracks }) => {
 
     const controller = new AbortController();
     setAbortController(controller);
-    fetch(
-      (`${apiPath}`,
-      {
-        signal: controller.signal,
+
+    fetch(apiPath, {
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.blob();
       })
-    )
-      .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
+        setCurrentAudio(audioURL);
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
-    // load track
-    if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
-      if (playingState === "play") {
-        wavesurferObjRef.current.pause();
-        setIsPlaying(true);
-      } else {
-        wavesurferObjRef.current.play();
-        setIsPlaying(false);
-      }
-      return;
-    }
     setCurrentTitle(musicTrack.title);
-    setCurrentAudio(`${subdomainUrl}/${musicTrack.url_slug}-master.mp3`);
   };
 
   const handleAudioPlayPause = () => {
