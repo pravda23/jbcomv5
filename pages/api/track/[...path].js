@@ -1,26 +1,20 @@
 export default async function handler(req, res) {
-  const { path } = req.query;
-  console.log("req.query:", req.query);
-  console.log("path:", path);
-
-  if (!path) {
-    console.error("Path is undefined. req.query:", req.query);
-    res.status(400).json({ error: "Missing path parameter" });
-    return;
-  }
-
-  if (!path) {
-    console.error("Path is undefined. req.query:", req.query);
-    return res.status(400).send("Invalid request");
-  }
-
-  // Construct the Hostinger URL dynamically
-  const hostingerUrl = `https://track.johnbartmann.com/${path.join("/")}`;
-  console.log(hostingerUrl);
-
-  console.log("Fetching from Hostinger:", hostingerUrl);
+  console.log("API route called");
 
   try {
+    const { path } = req.query;
+    console.log("req.query:", req.query);
+    console.log("path:", path);
+
+    if (!path) {
+      console.error("Path is undefined. req.query:", req.query);
+      res.status(400).json({ error: "Missing path parameter" });
+      return;
+    }
+
+    const hostingerUrl = `/api/track/${path.join("/")}`;
+    console.log("Fetching from Hostinger:", hostingerUrl);
+
     const response = await fetch(hostingerUrl);
 
     if (!response.ok) {
