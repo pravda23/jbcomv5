@@ -5,14 +5,17 @@ export default async function handler(req, res) {
     res.status(400).json({ error: "Missing slug parameter" });
     return;
   }
+  console.log("req.query:", req.query);
   console.log("path: " + path);
 
   if (!path) {
+    console.error("Path is undefined. req.query:", req.query);
     return res.status(400).send("Invalid request");
   }
 
   // Construct the Hostinger URL dynamically
   const hostingerUrl = `https://track.johnbartmann.com/${path.join("/")}`;
+  console.log(hostingerUrl);
 
   console.log("Fetching from Hostinger:", hostingerUrl);
 

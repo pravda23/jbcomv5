@@ -58,7 +58,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       if (error.name === "AbortError") {
         console.log("Request was aborted");
       } else {
-        console.error("An error occurred:", error);
+        // console.error("An error occurred:", error); #uncomment when CORS fixed
       }
     });
 
@@ -104,7 +104,6 @@ const MusicListPlayer = ({ musicTracks }) => {
 
     const controller = new AbortController();
     setAbortController(controller);
-
     fetch(
       (`${apiPath}`,
       {
@@ -114,7 +113,6 @@ const MusicListPlayer = ({ musicTracks }) => {
       .then((response) => response.blob())
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
-        console.log(audioURL);
       })
       .catch((error) => console.error("Audio fetch error:", error));
 
