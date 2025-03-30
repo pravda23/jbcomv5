@@ -94,7 +94,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
 
-    const apiPath = `/api/track/${musicTrack.url_slug}-master.mp3`;
+    const apiPath = `/api/track/page?=${musicTrack.url_slug}-master.mp3`;
 
     if (abortController) {
       abortController.abort(); // Abort any ongoing request
