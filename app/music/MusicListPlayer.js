@@ -3,6 +3,7 @@ import DownloadModal from "../components/DownloadModal.js";
 import Tooltip from "../components/Tooltip.js";
 import WaveSurfer from "wavesurfer.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
+// import Spinner from "../utilities/loading-spinner.js";
 import { IoMdDownload } from "react-icons/io";
 import { PiYoutubeLogo } from "react-icons/pi";
 import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
@@ -17,7 +18,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   const [currentTitle, setCurrentTitle] = useState(null);
   const [playingState, setPlayingState] = useState("notStarted");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [loadingState, setLoadingState] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [abortController, setAbortController] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,7 +55,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       if (error.name === "AbortError") {
         console.log("Request was aborted");
       } else {
-        // console.error("An error occurred:", error); #uncomment when CORS fixed
+        console.error("An error occurred:", error);
       }
     });
 
@@ -86,6 +87,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   }, [currentAudio, currentTitle]);
 
   const handleAudioSelect = ({ musicTrack }) => {
+    console.log(musicTrack.url_slug);
     if (!musicTrack || !musicTrack.url_slug) {
       console.error(
         "Track information is missing. Invalid musicTrack: ",
@@ -103,6 +105,8 @@ const MusicListPlayer = ({ musicTracks }) => {
     const controller = new AbortController();
     setAbortController(controller);
 
+    setIsLoading(true);
+
     console.log("Fetching from API path:", apiPath);
     fetch(apiPath, {
       signal: controller.signal,
@@ -117,7 +121,10 @@ const MusicListPlayer = ({ musicTracks }) => {
         const audioURL = URL.createObjectURL(blob);
         setCurrentAudio(audioURL);
       })
-      .catch((error) => console.error("Audio fetch error:", error));
+      .catch((error) => {
+        console.log("Audio fetch error:", error);
+      })
+      .finally(() => setIsLoading(false));
 
     // load track
     if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
@@ -245,6 +252,8 @@ const MusicListPlayer = ({ musicTracks }) => {
                   //   backgroundImage: `url(${currentImage})`,
                   // }}
                 >
+                  {/* {isLoading && <Spinner />} */}
+
                   {!isPlaying ? (
                     <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
                   ) : (

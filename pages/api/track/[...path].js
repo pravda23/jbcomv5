@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const hostingerUrl = `/api/track/${path.join("/")}`;
+    const hostingerUrl = `https://track.johnbartmann.com/${path.join("/")}`;
     console.log("Fetching from Hostinger:", hostingerUrl);
 
     const response = await fetch(hostingerUrl);
