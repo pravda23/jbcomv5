@@ -9,22 +9,23 @@ const DownloadModal = ({ musicTrack, onClose }) => {
     }
   };
 
-  console.log("hello");
-
   const handleDownload = async () => {
     const response = await fetch(
-      `/api/track/page?=${musicTrack.url_slug}-master.mp3`
+      `https://track.johnbartmann.com/${musicTrack.url_slug}-master.mp3`
     );
-    console.log(response);
+    // console.log(response);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
+    // console.log("url: " + url);
+    // console.log("blob: " + blob);
     const a = document.createElement("a");
-    console.log(a);
+    // console.log("a: " + a);
     a.href = url;
+    // console.log("a href: " + a.href);
     a.download = `${musicTrack.url_slug}-master.mp3`;
     document.body.appendChild(a);
     a.click();
-    console.log(a.download);
+    // console.log("a.download" + a.download);
     a.remove();
     window.URL.revokeObjectURL(url);
   };

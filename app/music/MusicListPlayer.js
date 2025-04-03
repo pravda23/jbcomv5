@@ -28,12 +28,13 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   musicTracks.sort((a, b) => b.rank - a.rank);
 
-  // const selectRandom = ({ musicTracks }) => {
-  //   let selectedTrack =
-  //     musicTracks[Math.floor(Math.random() * musicTracks.length)];
-  //   setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
-  //   setCurrentTitle(selectedTrack.title);
-  // };
+  const selectRandom = ({ musicTracks }) => {
+    let selectedTrack =
+      musicTracks[Math.floor(Math.random() * musicTracks.length)];
+    setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
+    console.log(currentAudio);
+    setCurrentTitle(selectedTrack.title);
+  };
 
   useEffect(() => {
     if (currentAudio === undefined) {
@@ -109,6 +110,7 @@ const MusicListPlayer = ({ musicTracks }) => {
     setIsLoading(true);
 
     console.log("Fetching from API path:", trackApiUrl);
+
     fetch(trackApiUrl, {
       signal: controller.signal,
     })
@@ -121,9 +123,12 @@ const MusicListPlayer = ({ musicTracks }) => {
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
         setCurrentAudio(audioURL);
+        console.log("current audio: " + currentAudio);
       })
       .catch((error) => {
-        console.log("Audio fetch error:", error);
+        if (error.name === "AbortError") {
+          console.log("Fetch aborted");
+        }
       })
       .finally(() => setIsLoading(false));
 
@@ -175,6 +180,7 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   return (
     <>
+      <title>John Bartmann | Professional and creative Portfolio </title>
       <div className="flex-grow overflow-auto">
         <div className="flex justify-center">
           <div className="flex justify-between">

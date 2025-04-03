@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import "../styles/App.styles.scss";
 import ReactGA from "react-ga4";
@@ -21,13 +20,7 @@ function App() {
 
   return (
     <>
-      <Head>
-        <title>John Bartmann | Creative Portfolio</title>
-        <meta
-          name="description"
-          content="Creative portfolio of John Bartmann, a South African web developer and music producer."
-        />
-      </Head>
+      <title>John Bartmann | Professional and creative Portfolio </title>
       <div className="content-container">
         <div className="overlay">
           <div className="app-container hiddenscrollbars">
