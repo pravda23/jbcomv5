@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Define source and destination directories
-const sourceDir = "D:\\GD\\JBcom\\Audio\\_Published";
+const sourceDir = "K:\\_JBCOM PUBLISHED\\00 SINGLE TRACKS";
 const destinationDir = "K:\\MASTER-MP3";
 
 // Ensure the destination directory exists
@@ -26,7 +26,10 @@ const copyMasterFiles = (dir) => {
       if (entry.isDirectory()) {
         // Recursively search subdirectories
         copyMasterFiles(fullPath);
-      } else if (entry.isFile() && entry.name.endsWith("-master.mp3")) {
+      } else if (
+        entry.isFile() &&
+        entry.name.endsWith("-master.mp3" || "-Master.mp3")
+      ) {
         // Copy file to the destination directory
         const destinationFile = path.join(destinationDir, entry.name);
         fs.copyFile(fullPath, destinationFile, (err) => {

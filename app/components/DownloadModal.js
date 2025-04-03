@@ -9,15 +9,22 @@ const DownloadModal = ({ musicTrack, onClose }) => {
     }
   };
 
+  console.log("hello");
+
   const handleDownload = async () => {
-    const response = await fetch(`/track/${musicTrack.url_slug}-master.mp3`);
+    const response = await fetch(
+      `/api/track/page?=${musicTrack.url_slug}-master.mp3`
+    );
+    console.log(response);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
+    console.log(a);
     a.href = url;
     a.download = `${musicTrack.url_slug}-master.mp3`;
     document.body.appendChild(a);
     a.click();
+    console.log(a.download);
     a.remove();
     window.URL.revokeObjectURL(url);
   };
@@ -40,7 +47,7 @@ const DownloadModal = ({ musicTrack, onClose }) => {
             className="flex items-center justify-center p-4 cursor-pointer rounded-lg hover:bg-secondarylight hover:text-white transition-colors"
             onClick={handleDownload}
           >
-            <IoMdDownload className="text-4xl" />
+            <IoMdDownload className="text-4xl" id="download-button" />
           </div>
           <p className="mt-4 text-white text-sm leading-relaxed whitespace-pre-wrap break-words">
             Use the track however you like for free when you add this line of

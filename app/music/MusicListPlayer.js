@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import DownloadModal from "../components/DownloadModal.js";
+import { IoMdDownload } from "react-icons/io";
 import Tooltip from "../components/Tooltip.js";
 import WaveSurfer from "wavesurfer.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 // import Spinner from "../utilities/loading-spinner.js";
-import { IoMdDownload } from "react-icons/io";
+
 import { PiYoutubeLogo } from "react-icons/pi";
 import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
 
 const MusicListPlayer = ({ musicTracks }) => {
+  const trackApiUrl = "/api/track/page?=${musicTrack.url_slug}-master.mp3";
+
   const subdomainUrl = process.env.NEXT_PUBLIC_API_SUBDOMAIN_URL;
 
   const wavesurferRef = useRef(null);
@@ -96,8 +99,6 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
 
-    const apiPath = `/api/track/page?=${musicTrack.url_slug}-master.mp3`;
-
     if (abortController) {
       abortController.abort(); // Abort any ongoing request
     }
@@ -107,8 +108,8 @@ const MusicListPlayer = ({ musicTracks }) => {
 
     setIsLoading(true);
 
-    console.log("Fetching from API path:", apiPath);
-    fetch(apiPath, {
+    console.log("Fetching from API path:", trackApiUrl);
+    fetch(trackApiUrl, {
       signal: controller.signal,
     })
       .then((response) => {
@@ -140,12 +141,8 @@ const MusicListPlayer = ({ musicTracks }) => {
         setIsPlaying(false);
       }
       return;
-    } else {
-      console.log(
-        "currentAudio !== " +
-          `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`
-      );
     }
+
     setCurrentTitle(musicTrack.title);
     setCurrentAudio(`${subdomainUrl}/${musicTrack.url_slug}-master.mp3`);
   };
@@ -218,7 +215,6 @@ const MusicListPlayer = ({ musicTracks }) => {
                       <div className="text-sm  text-left w-full whitespace-nowrap overflow-hidden ">
                         <div className="flex items-center justify-center ">
                           {/* DOWNLOAD MODAL */}
-
                           <div className="flex items-center justify-center">
                             <div
                               onClick={(e) => {

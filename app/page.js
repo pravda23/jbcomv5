@@ -6,6 +6,7 @@ const Home = () => {
   console.log("updated");
   return (
     <>
+      <title>John Bartmann | Creative and professional portfolio</title>
       <div className="flex flex-col min-h-screen">
         <NavbarHome />
         <div className="flex flex-col justify-center flex-grow t-1/2">
