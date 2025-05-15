@@ -4,10 +4,12 @@ import PageHeadingTitle from "../components/PageHeadingTitle.js";
 import Footer from "../components/Footer.js";
 import workJobs from "../data/workJobs.json";
 import Card from "../components/Card.js";
+import siteInfo from "../data/siteInfo.json";
 
 const Work = () => {
   return (
     <>
+      <title>{siteInfo.title}</title>
       <div>
         <Navbar />
         <div className="single-page-container">

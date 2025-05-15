@@ -7,6 +7,7 @@ import MusicSocials from "./MusicSocials.js";
 import MusicSubMenu from "./MusicSubMenu.js";
 import Footer from "../components/Footer.js";
 import "../styles/App.styles.scss";
+import siteInfo from "../data/siteInfo.json";
 
 const Music = () => {
   const [currentFile, setCurrentFile] = useState();
@@ -19,14 +20,20 @@ const Music = () => {
   };
 
   return (
-    <div>
-      {/* <Navbar /> */}
-      <div className="single-page-container">
-        <MusicSocials />
-        <MusicSubMenu />
-        <MusicListPlayer musicTracks={musicTracks} clickHandle={clickHandle} />
+    <>
+      <title>{siteInfo.title}</title>
+      <div>
+        {/* <Navbar /> */}
+        <div className="single-page-container">
+          <MusicSocials />
+          <MusicSubMenu />
+          <MusicListPlayer
+            musicTracks={musicTracks}
+            clickHandle={clickHandle}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

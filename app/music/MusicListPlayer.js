@@ -3,11 +3,12 @@ import DownloadModal from "../components/DownloadModal.js";
 import { IoMdDownload } from "react-icons/io";
 import Tooltip from "../components/Tooltip.js";
 import WaveSurfer from "wavesurfer.js";
+import Player from "./Player.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 // import Spinner from "../utilities/loading-spinner.js";
 
 import { PiYoutubeLogo } from "react-icons/pi";
-import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
+// import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
 
 const MusicListPlayer = ({ musicTracks }) => {
@@ -53,8 +54,6 @@ const MusicListPlayer = ({ musicTracks }) => {
       minPxPerSec: 1,
     });
 
-    wavesurferObjRef.current = wavesurfer;
-
     wavesurfer.load(currentAudio).catch((error) => {
       if (error.name === "AbortError") {
         console.log("Request was aborted");
@@ -83,6 +82,8 @@ const MusicListPlayer = ({ musicTracks }) => {
       setIsPlaying(false);
     });
 
+    wavesurferObjRef.current = wavesurfer;
+
     return () => {
       if (wavesurfer && !wavesurfer.isDestroyed) {
         wavesurfer.destroy();
@@ -91,17 +92,16 @@ const MusicListPlayer = ({ musicTracks }) => {
   }, [currentAudio, currentTitle]);
 
   const handleAudioSelect = ({ musicTrack }) => {
-    console.log(musicTrack.url_slug);
     if (!musicTrack || !musicTrack.url_slug) {
       console.error(
-        "Track information is missing. Invalid musicTrack: ",
+        "Track information is missing. Invalid track: ",
         musicTrack
       );
       return;
     }
 
     if (abortController) {
-      abortController.abort(); // Abort any ongoing request
+      abortController.abort();
     }
 
     const controller = new AbortController();
@@ -109,8 +109,7 @@ const MusicListPlayer = ({ musicTracks }) => {
 
     setIsLoading(true);
 
-    console.log("Fetching from API path:", trackApiUrl);
-
+    // fetch audio url from API
     fetch(trackApiUrl, {
       signal: controller.signal,
     })
@@ -123,7 +122,6 @@ const MusicListPlayer = ({ musicTracks }) => {
       .then((blob) => {
         const audioURL = URL.createObjectURL(blob);
         setCurrentAudio(audioURL);
-        console.log("current audio: " + currentAudio);
       })
       .catch((error) => {
         if (error.name === "AbortError") {
@@ -134,10 +132,6 @@ const MusicListPlayer = ({ musicTracks }) => {
 
     // load track
     if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
-      console.log(
-        "currentAudio === " +
-          `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`
-      );
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
         setIsPlaying(true);
@@ -180,7 +174,6 @@ const MusicListPlayer = ({ musicTracks }) => {
 
   return (
     <>
-      <title>John Bartmann | Professional and creative Portfolio </title>
       <div className="flex-grow overflow-auto">
         <div className="flex justify-center">
           <div className="flex justify-between">
@@ -245,41 +238,19 @@ const MusicListPlayer = ({ musicTracks }) => {
                 </div>
               </div>
             ))}
-            <div className="wavesurfer-container">
-              <div className="wavesurfer-img">
-                <div
-                  className="wavesurfer-img-overlay"
-                  onClick={() => handleAudioPlayPause()}
-                  // style={{
-                  //   backgroundImage: `url(${currentImage})`,
-                  // }}
-                >
-                  {/* {isLoading && <Spinner />} */}
 
-                  {!isPlaying ? (
-                    <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
-                  ) : (
-                    <BsFillPauseFill className="text-4xl hover:scale-125 text-white" />
-                  )}
-                </div>
-              </div>
-              <div className="wavesurfer-waveform">
-                <div
-                  className="text-m"
-                  style={{ width: "100%" }}
-                  ref={wavesurferRef}
-                >
-                  {currentTitle}
-                </div>
-              </div>
-              {/* <Tooltip text="Play random track"> */}
-              <div className="relative flex items-center text-4xl m-2 hover:scale-125">
-                <span onClick={() => selectRandom({ musicTracks })}>
-                  <PiDiceFive />
-                </span>
-              </div>
-              {/* </Tooltip> */}
-            </div>
+            <Player
+              musicTracks={musicTracks}
+              isPlaying={isPlaying}
+              wavesurferRef={wavesurferRef}
+              isModalOpen={isModalOpen}
+              selectedTrackId={selectedTrackId}
+              playingState={playingState}
+              handleAudioPlayPause={handleAudioPlayPause}
+              currentTitle={currentTitle}
+              currentAudio={currentAudio}
+              setCurrentAudio={setCurrentAudio}
+            />
           </div>
         </div>
       </div>

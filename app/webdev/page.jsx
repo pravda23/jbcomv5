@@ -3,10 +3,12 @@ import PageHeadingTitle from "../components/PageHeadingTitle.js";
 import Card from "../components/Card.js";
 import Footer from "../components/Footer.js";
 import devJobs from "../data/devJobs.json";
+import siteInfo from "../data/siteInfo.json";
 
 const WebDev = () => {
   return (
     <>
+      <title>{siteInfo.title}</title>
       <div>
         <Navbar />
         <div className="single-page-container">

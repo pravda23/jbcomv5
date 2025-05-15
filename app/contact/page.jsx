@@ -8,11 +8,13 @@ import {
 } from "react-icons/fa";
 
 import Link from "next/link";
+import siteInfo from "../data/siteInfo.json";
 
 const Contact = () => {
   console.log("contact");
   return (
     <>
+      <title>{siteInfo.title}</title>
       <Navbar />
       <div className="flex flex-col min-h-screen">
         <main className="flex-grow p-4">

@@ -2,12 +2,13 @@ import Head from "next/head.js";
 import NavbarHome from "./components/NavbarHome.js";
 import Footer from "./components/Footer.js";
 import ButtonLarge from "./components/ButtonLarge.js";
+import siteInfo from "./data/siteInfo.json";
 
 const Home = () => {
   console.log("updated");
   return (
     <>
-      <title>John Bartmann | Professional and creative Portfolio </title>
+      <title>{siteInfo.title}</title>
       <div className="flex flex-col min-h-screen">
         <NavbarHome />
         <div className="flex flex-col justify-center flex-grow t-1/2">

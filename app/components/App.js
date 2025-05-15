@@ -14,13 +14,14 @@ import BlogPost from "./BlogPost.component";
 import BlogPostList from "./BlogPostList.component";
 import NotFound from "./NotFound.component";
 import { FaEnvelope, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import siteInfo from "../data/siteInfo.json";
 
 function App() {
   ReactGA.initialize("G-0FBV9Z3D2X");
 
   return (
     <>
-      <title>John Bartmann | Professional and creative Portfolio </title>
+      <title>{siteInfo.title}</title>
       <div className="content-container">
         <div className="overlay">
           <div className="app-container hiddenscrollbars">
