@@ -5,10 +5,7 @@ import Tooltip from "../components/Tooltip.js";
 import WaveSurfer from "wavesurfer.js";
 import Player from "./Player.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
-// import Spinner from "../utilities/loading-spinner.js";
-
 import { PiYoutubeLogo } from "react-icons/pi";
-// import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
 
 const MusicListPlayer = ({ musicTracks }) => {
@@ -138,6 +135,7 @@ const MusicListPlayer = ({ musicTracks }) => {
       } else {
         wavesurferObjRef.current.play();
         setIsPlaying(false);
+        setIsLoading(false);
       }
       return;
     }
@@ -152,12 +150,17 @@ const MusicListPlayer = ({ musicTracks }) => {
     } else {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
-        setIsPlaying(true);
-      } else if (playingState !== "play") {
-        wavesurferObjRef.current.play();
         setIsPlaying(false);
+        setIsLoading(false);
+      } else if (playingState !== "play") {
+        setIsPlaying(true);
+        wavesurferObjRef.current.play();
+        wavesurferObjRef.current.once("play", () => {
+          setIsLoading(false);
+        });
       } else {
         console.log("Error: Unknown state: " + playingState);
+        setIsLoading(false);
       }
     }
   };
@@ -250,6 +253,8 @@ const MusicListPlayer = ({ musicTracks }) => {
               currentTitle={currentTitle}
               currentAudio={currentAudio}
               setCurrentAudio={setCurrentAudio}
+              isLoading={isLoading}
+              selectRandom={selectRandom}
             />
           </div>
         </div>

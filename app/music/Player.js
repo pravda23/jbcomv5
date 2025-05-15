@@ -2,13 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 
 import DownloadModal from "../components/DownloadModal.js";
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
-// import Spinner from "../utilities/loading-spinner.js";
-
-// import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
+import { PiDiceFiveFill, PiDiceFive } from "react-icons/pi";
 import "../styles/MusicListPlayer.styles.css";
 
 const Player = (props) => {
-  console.log(props);
   return (
     <div>
       <div className="wavesurfer-container">
@@ -20,10 +17,12 @@ const Player = (props) => {
             //   backgroundImage: `url(${currentImage})`,
             // }}
           >
-            {/* {isLoading && <Spinner />} */}
-
             {!props.isPlaying ? (
-              <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
+              props.isLoading ? (
+                <div className="animate-spin h-8 w-8 rounded-full border-4 border-t-blue-500 border-gray-300"></div>
+              ) : (
+                <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
+              )
             ) : (
               <BsFillPauseFill className="text-4xl hover:scale-125 text-white" />
             )}
@@ -40,9 +39,9 @@ const Player = (props) => {
         </div>
         {/* <Tooltip text="Play random track"> */}
         <div className="relative flex items-center text-4xl m-2 hover:scale-125">
-          <span onClick={() => props.selectRandom({ musicTracks })}>
-            {/* <PiDiceFive /> */}
-          </span>
+          {/* <span onClick={() => props.selectRandom({ musicTracks })}>
+            <PiDiceFive />
+          </span> */}
         </div>
         {/* </Tooltip> */}
       </div>
