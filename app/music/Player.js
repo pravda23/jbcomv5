@@ -17,14 +17,12 @@ const Player = (props) => {
             //   backgroundImage: `url(${currentImage})`,
             // }}
           >
-            {!props.isPlaying ? (
-              props.isLoading ? (
-                <div className="animate-spin h-8 w-8 rounded-full border-4 border-t-blue-500 border-gray-300"></div>
-              ) : (
-                <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
-              )
-            ) : (
+            {props.currentAudio && props.isLoading ? (
+              <div className="animate-spin h-8 w-8 rounded-full border-4 border-t-blue-500 border-gray-300"></div>
+            ) : props.isPlaying ? (
               <BsFillPauseFill className="text-4xl hover:scale-125 text-white" />
+            ) : (
+              <BsFillPlayFill className="text-4xl hover:scale-125 text-white" />
             )}
           </div>
         </div>

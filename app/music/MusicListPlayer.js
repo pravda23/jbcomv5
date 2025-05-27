@@ -19,6 +19,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   const [currentTitle, setCurrentTitle] = useState(null);
   const [playingState, setPlayingState] = useState("notStarted");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [wsIsPlaying, setWsIsPlaying] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [abortController, setAbortController] = useState(null);
@@ -30,7 +31,6 @@ const MusicListPlayer = ({ musicTracks }) => {
     let selectedTrack =
       musicTracks[Math.floor(Math.random() * musicTracks.length)];
     setCurrentAudio(`${baseUrl}/track/${selectedTrack.url_slug}-master.mp3`);
-    console.log(currentAudio);
     setCurrentTitle(selectedTrack.title);
   };
 
@@ -51,30 +51,36 @@ const MusicListPlayer = ({ musicTracks }) => {
       minPxPerSec: 1,
     });
 
-    wavesurfer.load(currentAudio).catch((error) => {
-      if (error.name === "AbortError") {
-        console.log("Request was aborted");
-      } else {
-        console.error("An error occurred:", error);
-      }
-    });
+    wavesurfer
+      .load(currentAudio)
+      // .then(console.log("WS load current audio:", currentAudio))
+      .catch((error) => {
+        if (error.name === "AbortError") {
+          console.log("Request was aborted");
+        } else {
+          console.error("An error occurred:", error);
+        }
+      });
 
     wavesurfer.once("ready", () => {
       wavesurfer.play();
     });
 
     wavesurfer.on("play", () => {
+      // console.log("WS play current audio:", currentAudio);
       setPlayingState("play");
       setCurrentTitle(currentTitle);
       setIsPlaying(true);
     });
 
     wavesurfer.on("pause", () => {
+      // console.log("WS pause current audio:", currentAudio);
       setPlayingState("pause");
       setIsPlaying(false);
     });
 
     wavesurfer.on("finish", () => {
+      // console.log("WS finish audio:", currentAudio);
       setPlayingState("finish");
       setIsPlaying(false);
     });
@@ -89,6 +95,8 @@ const MusicListPlayer = ({ musicTracks }) => {
   }, [currentAudio, currentTitle]);
 
   const handleAudioSelect = ({ musicTrack }) => {
+    setIsLoading(true);
+
     if (!musicTrack || !musicTrack.url_slug) {
       console.error(
         "Track information is missing. Invalid track: ",
@@ -97,16 +105,13 @@ const MusicListPlayer = ({ musicTracks }) => {
       return;
     }
 
+    // prevent multiple fetches in quick succession
     if (abortController) {
       abortController.abort();
     }
-
     const controller = new AbortController();
     setAbortController(controller);
 
-    setIsLoading(true);
-
-    // fetch audio url from API
     fetch(trackApiUrl, {
       signal: controller.signal,
     })
@@ -130,12 +135,16 @@ const MusicListPlayer = ({ musicTracks }) => {
     // load track
     if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
       if (playingState === "play") {
+        // console.log(wavesurferObjRef.current);
         wavesurferObjRef.current.pause();
         setIsPlaying(true);
-      } else {
+        setIsLoading(false);
+        // console.log("WS pause current audio " + isLoading);
+      } else if (playingState === "pause") {
         wavesurferObjRef.current.play();
         setIsPlaying(false);
-        setIsLoading(false);
+      } else {
+        // console.log("Error: Unknown state: " + playingState);
       }
       return;
     }
@@ -151,16 +160,15 @@ const MusicListPlayer = ({ musicTracks }) => {
       if (playingState === "play") {
         wavesurferObjRef.current.pause();
         setIsPlaying(false);
-        setIsLoading(false);
       } else if (playingState !== "play") {
-        setIsPlaying(true);
         wavesurferObjRef.current.play();
         wavesurferObjRef.current.once("play", () => {
+          setIsPlaying(true);
           setIsLoading(false);
         });
       } else {
         console.log("Error: Unknown state: " + playingState);
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     }
   };
@@ -230,7 +238,7 @@ const MusicListPlayer = ({ musicTracks }) => {
                               isModalOpen && (
                                 <DownloadModal
                                   musicTrack={musicTrack}
-                                  onClose={closeModal} // Pass the onClose function to the modal
+                                  onClose={closeModal}
                                 />
                               )}
                           </div>
