@@ -18,7 +18,7 @@ const Player = (props) => {
             // }}
           >
             {props.currentAudio && props.isLoading ? (
-              <div className="animate-spin h-8 w-8 rounded-full border-4 border-t-blue-500 border-gray-300"></div>
+              <div className="animate-spin h-8 w-8 rounded-full border-4 border-t-pink-500"></div>
             ) : props.isPlaying ? (
               <BsFillPauseFill className="text-4xl hover:scale-125 text-white" />
             ) : (

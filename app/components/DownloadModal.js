@@ -1,11 +1,13 @@
 import { IoMdDownload } from "react-icons/io";
+import { useState } from "react";
 
 const DownloadModal = ({ musicTrack, onClose }) => {
-  // Function to handle clicks on the overlay
+  const [copied, setCopied] = useState(false);
+
   const handleOverlayClick = (e) => {
     e.stopPropagation();
     if (e.target === e.currentTarget) {
-      onClose(); // Close the modal if the overlay itself is clicked
+      onClose();
     }
   };
 
@@ -13,32 +15,38 @@ const DownloadModal = ({ musicTrack, onClose }) => {
     const response = await fetch(
       `https://track.johnbartmann.com/${musicTrack.url_slug}-master.mp3`
     );
-    // console.log(response);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
-    // console.log("url: " + url);
-    // console.log("blob: " + blob);
     const a = document.createElement("a");
-    // console.log("a: " + a);
     a.href = url;
-    // console.log("a href: " + a.href);
     a.download = `${musicTrack.url_slug}-master.mp3`;
     document.body.appendChild(a);
     a.click();
-    // console.log("a.download" + a.download);
     a.remove();
     window.URL.revokeObjectURL(url);
+  };
+
+  const copyText = `Music by John Bartmann https://youtube.com/johnbartmannmusic ${musicTrack.lictype}`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(copyText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      setCopied(false);
+    }
   };
 
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 cursor-default"
-      onClick={handleOverlayClick} // Handle clicks on the overlay
-      style={{ pointerEvents: "auto" }} // Ensure overlay captures all pointer events
+      onClick={handleOverlayClick}
+      style={{ pointerEvents: "auto" }}
     >
       <div
         className="relative w-2/3 h-1/2 bg-zinc-800 border-2 border-white p-4 rounded-lg shadow-lg flex flex-col justify-center overflow-hidden"
-        onClick={(e) => e.stopPropagation()} // Prevent clicks inside the modal from propagating
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Content */}
         <div className="text-lg mb-2 border-b-2">{musicTrack.title}</div>
@@ -50,14 +58,27 @@ const DownloadModal = ({ musicTrack, onClose }) => {
           >
             <IoMdDownload className="text-4xl" id="download-button" />
           </div>
-          <p className="mt-4 text-white text-sm leading-relaxed whitespace-pre-wrap break-words">
-            Use the track however you like for free when you add this line of
-            text to your description:
-            <br />
-            <br />
-            Music by John Bartmann https://youtube.com/johnbartmannmusic{" "}
-            {musicTrack.lictype}
-          </p>
+          <div className=" text-white text-sm leading-relaxed whitespace-pre-wrap break-words">
+            <p>
+              Use the track however you like for free when you add this line of
+              text to your description:
+            </p>
+            <div className="flex items-center gap-2 mt-2">
+              <span
+                id="download-text"
+                className="px-2 py-1 border border-gray-400 rounded bg-zinc-900 text-gray-200 select-all"
+                style={{ fontFamily: "monospace", fontSize: "0.95em" }}
+              >
+                {copyText}
+              </span>
+              <button
+                onClick={handleCopy}
+                className={`ml-2 px-2 py-1 bg-gray-600 text-white rounded border border-gray-400 hover:bg-gray-700 transition-colors text-xs`}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Close Button */}

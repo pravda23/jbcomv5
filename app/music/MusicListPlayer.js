@@ -17,9 +17,7 @@ const MusicListPlayer = ({ musicTracks }) => {
   const wavesurferObjRef = useRef(null);
   const [currentAudio, setCurrentAudio] = useState();
   const [currentTitle, setCurrentTitle] = useState(null);
-  const [playingState, setPlayingState] = useState("notStarted");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [wsIsPlaying, setWsIsPlaying] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [abortController, setAbortController] = useState(null);
@@ -51,37 +49,30 @@ const MusicListPlayer = ({ musicTracks }) => {
       minPxPerSec: 1,
     });
 
-    wavesurfer
-      .load(currentAudio)
-      // .then(console.log("WS load current audio:", currentAudio))
-      .catch((error) => {
-        if (error.name === "AbortError") {
-          console.log("Request was aborted");
-        } else {
-          console.error("An error occurred:", error);
-        }
-      });
+    wavesurfer.load(currentAudio).catch((error) => {
+      if (error.name === "AbortError") {
+        console.log("Request was aborted");
+      } else {
+        console.error("An error occurred:", error);
+      }
+    });
 
     wavesurfer.once("ready", () => {
+      setIsLoading(false);
       wavesurfer.play();
     });
 
     wavesurfer.on("play", () => {
-      // console.log("WS play current audio:", currentAudio);
-      setPlayingState("play");
-      setCurrentTitle(currentTitle);
       setIsPlaying(true);
+      setIsLoading(false);
+      setCurrentTitle(currentTitle);
     });
 
     wavesurfer.on("pause", () => {
-      // console.log("WS pause current audio:", currentAudio);
-      setPlayingState("pause");
       setIsPlaying(false);
     });
 
     wavesurfer.on("finish", () => {
-      // console.log("WS finish audio:", currentAudio);
-      setPlayingState("finish");
       setIsPlaying(false);
     });
 
@@ -129,22 +120,16 @@ const MusicListPlayer = ({ musicTracks }) => {
         if (error.name === "AbortError") {
           console.log("Fetch aborted");
         }
-      })
-      .finally(() => setIsLoading(false));
+      });
 
     // load track
     if (currentAudio === `${subdomainUrl}/${musicTrack.url_slug}-master.mp3`) {
-      if (playingState === "play") {
-        // console.log(wavesurferObjRef.current);
+      if (isPlaying) {
         wavesurferObjRef.current.pause();
-        setIsPlaying(true);
         setIsLoading(false);
-        // console.log("WS pause current audio " + isLoading);
-      } else if (playingState === "pause") {
+      } else {
         wavesurferObjRef.current.play();
         setIsPlaying(false);
-      } else {
-        // console.log("Error: Unknown state: " + playingState);
       }
       return;
     }
@@ -156,20 +141,17 @@ const MusicListPlayer = ({ musicTracks }) => {
   const handleAudioPlayPause = () => {
     if (!currentAudio) {
       return;
+    }
+    if (isPlaying) {
+      wavesurferObjRef.current.pause();
+      setIsPlaying(false);
     } else {
-      if (playingState === "play") {
-        wavesurferObjRef.current.pause();
-        setIsPlaying(false);
-      } else if (playingState !== "play") {
-        wavesurferObjRef.current.play();
-        wavesurferObjRef.current.once("play", () => {
-          setIsPlaying(true);
-          setIsLoading(false);
-        });
-      } else {
-        console.log("Error: Unknown state: " + playingState);
-        // setIsLoading(false);
-      }
+      setIsLoading(true);
+      wavesurferObjRef.current.play();
+      wavesurferObjRef.current.once("play", () => {
+        setIsPlaying(true);
+        setIsLoading(false);
+      });
     }
   };
 
@@ -256,7 +238,6 @@ const MusicListPlayer = ({ musicTracks }) => {
               wavesurferRef={wavesurferRef}
               isModalOpen={isModalOpen}
               selectedTrackId={selectedTrackId}
-              playingState={playingState}
               handleAudioPlayPause={handleAudioPlayPause}
               currentTitle={currentTitle}
               currentAudio={currentAudio}

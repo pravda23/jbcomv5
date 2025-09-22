@@ -14,7 +14,10 @@ const Work = () => {
         <Navbar />
         <div className="single-page-container">
           <PageHeadingTitle title={"PREVIOUS WORK"} margin={"mt-4"} />
-          <p>A wide range of creative work for teams, brands and people.</p>
+          <p>
+            A wide range of technical and creative work for companies, teams and
+            people.
+          </p>
           {workJobs.map((job) => (
             <Card
               title={job.title}

@@ -64,10 +64,10 @@ const Navbar = () => {
                 WORK
               </h1>
             </a>
-            <a href="/webdev">
+            {/* <a href="/webdev">
               {" "}
               <h1 className="btn-nav">WEB DEV</h1>
-            </a>
+            </a> */}
             <a href="/music">
               {" "}
               <h1 className="btn-nav">MUSIC</h1>

@@ -17,7 +17,7 @@ const Home = () => {
           </div>
           <div className="flex flex-wrap justify-center">
             <ButtonLarge text={"WORK"} link={"/work"} />
-            <ButtonLarge text={"WEB DEV"} link={"/webdev"} />
+            {/* <ButtonLarge text={"WEB DEV"} link={"/webdev"} /> */}
             <ButtonLarge text={"MUSIC"} link={"/music"} />
             <ButtonLarge text={"CONTACT"} link={"/contact"} />
           </div>
